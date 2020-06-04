@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<p id="demo"></p>
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+var txt="";
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    var myObj = JSON.parse(this.responseText);
+    txt+="<table  align=\"center\" style=\"font-family: arial, sans-serif;border-collapse: collapse;width: 60%;\">";
+        txt+="<tr style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";
+        txt+="<th style=\"border: 1px solid #dddddd;background-color: #dddddd;text-align: center;padding: 8px;\">";
+        txt+="Day";
+        txt+="</th>";        
+        txt+="<th style=\"border: 1px solid #dddddd;background-color: #dddddd;text-align: center;padding: 8px;\">";
+        txt+="Date";
+        txt+="</th>";
+        txt+="<th style=\"border: 1px solid #dddddd;background-color: #dddddd;text-align: center;padding: 8px;\">";
+        txt+="Confirmed";
+        txt+="</th>";
+        txt+="<th style=\"border: 1px solid #dddddd;background-color: #dddddd;text-align: center;padding: 8px;\">";
+        txt+="Active";
+        txt+="</th>";
+        txt+="<th style=\"border: 1px solid #dddddd;background-color: #dddddd;text-align: center;padding: 8px;\">";
+        txt+="Recovered";
+        txt+="</th>";
+        txt+="<th style=\"border: 1px solid #dddddd;background-color: #dddddd;text-align: center;padding: 8px;\">";
+        txt+="Deaths";
+        txt+="<th style=\"border: 1px solid #dddddd;background-color: #dddddd;text-align: center;padding: 8px;\">";
+        txt+="Increased by";
+        txt+="</th></tr>";
+    for(var i=myObj.length-1;i>=0;i--){
+            txt+="<tr style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\"><tdstyle=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";
+                var s=myObj[i].Date;
+                var d = new Date(Date.parse(s))    
+                txt+="</td><td style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";
+                txt+=i+1;       
+            txt+="</td><td style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";
+                txt+=d.toDateString();
+                txt+="</td><td style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";
+                txt+=myObj[i].Confirmed;
+
+                txt+="</td><td style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";
+                txt+=myObj[i].Active;
+                txt+="</td><td style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">"; 
+                txt+=myObj[i].Recovered; 
+                txt+="</td><td style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";
+                txt+=myObj[i].Deaths;
+                txt+="</td><th style=\"border: 1px solid #dddddd;color: #fff; background: red;  text-align: center;padding: 8px;\">";
+                if(i!=0)
+                txt+=myObj[i].Confirmed-myObj[i-1].Confirmed;
+                else
+                txt+="-";                      
+                txt+="</th></tr>"
+    	
+    }
+    txt+="</table>";
+    document.getElementById("demo").innerHTML = txt;
+  }
+};
+xmlhttp.open("GET", "https://api.covid19api.com/country/india", true);
+xmlhttp.send();
+</script>
+
+
+</body>
+</html>
