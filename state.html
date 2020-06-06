@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <meta charset="UTF-8">
+                
+                <title>State</title>
+                <link rel="stylesheet" href="mapp.css">
+        </head>    
+<body>
+
+        
+<p id="demo"></p>
+</script>
+<script>
+var xmlhttp = new XMLHttpRequest();
+var txt="";
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    var myObj = JSON.parse(this.responseText);
+    txt+="<table  id=\"myTable\" align=\"center\" style=\"font-family: arial, sans-serif;border-collapse: collapse;width: 60%;\">";
+        txt+="<tr style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";
+        txt+="<th style=\"border: 1px solid #dddddd;background-color: #dddddd;text-align: center;padding: 8px;\">";
+        txt+="Position";
+        txt+="</th>";
+        txt+="<th style=\"border: 1px solid #dddddd;background-color: #dddddd;text-align: center;padding: 8px;\">";
+        txt+="State";
+        txt+="</th>";
+        txt+="<th style=\"border: 1px solid #dddddd;background-color: #dddddd;text-align: center;padding: 8px;\">";
+        txt+="Confirmed";
+        txt+="</th>";
+        txt+="<th style=\"border: 1px solid #dddddd;background-color: #dddddd;text-align: center;padding: 8px;\">";
+        txt+="Active";
+        txt+="</th>";
+        txt+="<th style=\"border: 1px solid #dddddd;background-color: #dddddd;text-align: center;padding: 8px;\">";
+        txt+="Recovered";
+        txt+="</th>";
+        txt+="<th style=\"border: 1px solid #dddddd;background-color: #dddddd;text-align: center;padding: 8px;\">";
+        txt+="Deaths";
+        txt+="</th></tr>";
+        var j=0;
+    for(var i=0;i<myObj.statewise.length-1;i++){
+            if(i==8)continue;
+            j++;
+            txt+="<tr style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\"><tdstyle=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";  
+                if(i==0 || i==14){
+                        txt+="<th style=\"border: 1px solid #dddddd;text-align: center;color: #fff; background: red;padding: 8px;\">";
+                        txt+=j;
+                        txt+="</th>";
+                        txt+="<th style=\"border: 1px solid #dddddd;text-align: center;color: #fff; background: red;padding: 8px;\">";
+                        txt+=myObj.statewise[i].state;
+                        txt+="</th>";
+                        txt+="<th style=\"border: 1px solid #dddddd;text-align: center;color: #fff; background: red;padding: 8px;\">";
+                txt+=myObj.statewise[i].confirmed;
+                txt+="</th><th style=\"border: 1px solid #dddddd;text-align: center;color: #fff; background: red;padding: 8px;\">";
+                txt+=myObj.statewise[i].active;
+                txt+="</th><th style=\"border: 1px solid #dddddd;text-align: center;color: #fff; background: red;padding: 8px;\">"; 
+                txt+=myObj.statewise[i].recovered; 
+                txt+="</th><th style=\"border: 1px solid #dddddd;text-align: center;color: #fff; background: red;padding: 8px;\">";
+                txt+=myObj.statewise[i].deaths;                    
+                txt+="</th></tr>"
+                }
+                else  {
+                        txt+="<th style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";
+                        txt+=j;
+                        txt+="</th>";  
+                        txt+="<th style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";
+                        txt+=myObj.statewise[i].state;
+                        txt+="</th>";  
+                        txt+="<td style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";
+                txt+=myObj.statewise[i].confirmed;
+                txt+="</td><td style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";
+                txt+=myObj.statewise[i].active;
+                txt+="</td><td style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">"; 
+                txt+=myObj.statewise[i].recovered; 
+                txt+="</td><td style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";
+                txt+=myObj.statewise[i].deaths;                    
+                txt+="</td></tr>" 
+                }     
+                
+    	
+    }
+    txt+="</table>";
+    document.getElementById("demo").innerHTML = txt;
+  }
+};
+xmlhttp.open("GET", "https://api.covid19india.org/data.json", true);
+xmlhttp.send();
+</script>
+
+
+
+</body>
+</html>
