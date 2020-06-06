@@ -42,7 +42,7 @@ xmlhttp.onreadystatechange = function() {
             if(i==8)continue;
             j++;
             txt+="<tr style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\"><tdstyle=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";  
-                if(i==0 || i==14){
+                if(   myObj.statewise[i].state=='Total' ||  myObj.statewise[i].state=='Telangana' ){
                         txt+="<th style=\"border: 1px solid #dddddd;text-align: center;color: #fff; background: red;padding: 8px;\">";
                         txt+=j;
                         txt+="</th>";
