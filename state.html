@@ -39,7 +39,7 @@ xmlhttp.onreadystatechange = function() {
         txt+="</th></tr>";
         var j=0;
     for(var i=0;i<myObj.statewise.length-1;i++){
-            if(i==8)continue;
+            if(myObj.statewise[i].state=='State Unassigned') continue;
             j++;
             txt+="<tr style=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\"><tdstyle=\"border: 1px solid #dddddd;text-align: center;padding: 8px;\">";  
                 if(   myObj.statewise[i].state=='Total' ||  myObj.statewise[i].state=='Telangana' ){
